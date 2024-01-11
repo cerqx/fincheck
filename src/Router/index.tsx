@@ -1,24 +1,7 @@
-import {Routes, Route, BrowserRouter, Outlet, Navigate} from 'react-router-dom'
+import {Routes, Route, BrowserRouter} from 'react-router-dom'
+import { AuthGuard } from './AuthGuard'
 
-interface AuthGuardProps {
-    isPrivate: boolean;
-}
 
-function AuthGuard({ isPrivate }: AuthGuardProps){
-    const signedIn = false;
-
-    if(!signedIn && isPrivate) {
-        //Redirecionar para /login
-        return <Navigate to='/login' replace/>
-    }
-
-    if(signedIn && !isPrivate) {
-        //Redirecionar para / (dashboard)
-        return <Navigate to='/'/>
-    }
-
-    return <Outlet />
-}
 
 export function Router() {
     return (
