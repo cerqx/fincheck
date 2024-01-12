@@ -1,4 +1,8 @@
-export function Logo() {
+interface LogoProps {
+    className?: string;
+}
+
+export function Logo({ className }: LogoProps) {
     return (
         <svg 
             width="139" 
@@ -6,6 +10,7 @@ export function Logo() {
             viewBox="0 0 139 32" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
+            className={className}
         >
             <path fill-rule="evenodd" clip-rule="evenodd" d="M24.5833 10.1152H12.5149C9.59615 10.1152 7.76562 12.1821 7.76562 15.1081V23.0024C7.76562 25.9284 9.58605 27.9952 12.5149 27.9952H24.5819C27.5121 27.9952 29.334 25.9284 29.334 23.0024V15.1081C29.334 12.1821 27.5121 10.1152 24.5833 10.1152Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M12.4961 16.0645H24.5963" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
