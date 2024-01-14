@@ -24,8 +24,8 @@ export function Login() {
             </header>
 
             <form className="mt-[60px] flex flex-col gap-4">
-                <Input type="email" placeholder="E-mail" />
-                <Input type="password" placeholder="Senha" />
+                <Input name="email" type="email" placeholder="E-mail" />
+                <Input name="password" type="password" placeholder="Senha" />
 
                 <button type="submit" className="mt-2">Entrar</button>
             </form>
