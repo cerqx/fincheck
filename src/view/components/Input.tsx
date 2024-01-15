@@ -2,9 +2,10 @@ import { ComponentProps, forwardRef } from "react";
 
 interface InputProps extends ComponentProps<'input'>{
     name: string;
+    error?: string;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({placeholder, name, id, ...props}, ref) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>(({placeholder, name, id, error, ...props}, ref) => {
     const inputId = id ?? name;
 
   return (
@@ -24,6 +25,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({placeholder, nam
         >
             {placeholder}
         </label>
+
+        {error && <span className="text-red-900 text-xs">{error}</span>}
     </div>
   )
 })
