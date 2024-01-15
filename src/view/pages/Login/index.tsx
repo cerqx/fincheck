@@ -30,7 +30,7 @@ export function Login() {
                 onSubmit={handleSubmit} 
                 className="mt-[60px] flex flex-col gap-4"
             >
-                <Input type="email" placeholder="E-mail" {...register('email')} error="Informe o email" />
+                <Input type="email" placeholder="E-mail" {...register('email')} />
                 {errors.email && <span>{errors.email.message}</span>}
                 <Input type="password" placeholder="Senha" {...register('password')} />
                 {errors.password && <span>{errors.password.message}</span>}

@@ -1,7 +1,6 @@
 import { ComponentProps, forwardRef } from "react";
 import { CrossCircledIcon } from '@radix-ui/react-icons'
-import { twMerge } from "tailwind-merge";
-import clsx from "clsx";
+import { cn } from "../../app/utils/cn";
 
 interface InputProps extends ComponentProps<'input'>{
     name: string;
@@ -18,10 +17,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({placeholder, nam
             ref={ref}
             name={name }
             id={inputId}
-            className={twMerge(clsx(
+            className={cn(
                 "bg-white rounded-lg border border-gray-500 px-3 h-[52px] w-full text-gray-800 pt-4 peer placeholder-shown:pt-0 focus:border-gray-800 transition-all outline-none",
                 error && '!border-red-900' //o ! na frente é igual ao !important no CSS, ou seja, ele tem prioridade
-            ))}
+            )}
             placeholder=" "
         />
 
