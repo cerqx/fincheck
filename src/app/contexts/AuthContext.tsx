@@ -9,10 +9,14 @@ interface AuthContextValue {
 export const AuthContext = createContext({} as AuthContextValue)
 
 export function AuthProvider({children}: {children: React.ReactNode}) {
-    const [signedIn, setSignedIn] = useState(false);
+    const [signedIn, setSignedIn] = useState<boolean>(() => {
+        const storedAccessToken = localStorage.getItem(localStorageKeys.ACCESS_TOKEN);
+        return !!storedAccessToken
+    });
 
     const signin = useCallback((accessToken: string) => {
         localStorage.setItem(localStorageKeys.ACCESS_TOKEN, accessToken);
+
         setSignedIn(true);
     }, []);
 
