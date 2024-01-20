@@ -1,5 +1,7 @@
 import { createContext, useCallback, useState } from 'react';
 import { localStorageKeys } from '../config/localStorageKeys';
+import { useQuery } from '@tanstack/react-query';
+import { usersService } from '../services/usersService';
 
 interface AuthContextValue {
      signedIn: boolean;
@@ -26,6 +28,11 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
         
         setSignedIn(false);
     }, []);
+
+    useQuery({
+        queryKey: ['loggedUsers'],
+        queryFn: () => usersService.me(),
+    })
 
     return (
         <AuthContext.Provider value={{ signedIn, signin, signout}}>
