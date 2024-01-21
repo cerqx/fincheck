@@ -35,7 +35,8 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
     const { isError } = useQuery({
         queryKey: ['loggedUsers'],
         queryFn: () => usersService.me(),
-        enabled: signedIn
+        enabled: signedIn,
+        staleTime: Infinity
     })
 
     useEffect(() => {
