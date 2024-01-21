@@ -20,7 +20,7 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
 
     const signin = useCallback((accessToken: string) => {
         localStorage.setItem(localStorageKeys.ACCESS_TOKEN, accessToken);
-        httpClient.defaults.headers.Authorization = `Bearer ${accessToken}`
+        httpClient.defaults.headers.Authorization = `Bearer ${accessToken }`
 
         setSignedIn(true);
     }, []);
@@ -34,6 +34,7 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
     useQuery({
         queryKey: ['loggedUsers'],
         queryFn: () => usersService.me(),
+        enabled: signedIn
     })
 
     return (
