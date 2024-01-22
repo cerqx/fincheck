@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { usersService } from '../services/usersService';
 import { httpClient } from '../services/httpClient';
 import toast from 'react-hot-toast';
-import { PageLoader } from '../../view/components/PageLoader';
 import { queryClient } from '../../App';
+import { LaunchScreen } from '../../view/components/LaunchScreen';
 
 interface AuthContextValue {
      signedIn: boolean;
@@ -51,7 +51,7 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
 
     if(isFetching) {
         return (
-            <PageLoader />
+            <LaunchScreen />
         )
     }
 
