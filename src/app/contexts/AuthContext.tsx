@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { usersService } from '../services/usersService';
 import { httpClient } from '../services/httpClient';
 import toast from 'react-hot-toast';
+import { PageLoader } from '../../view/components/PageLoader';
 
 interface AuthContextValue {
      signedIn: boolean;
@@ -32,7 +33,7 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
         setSignedIn(false);
     }, []);
 
-    const { isError } = useQuery({
+    const { isError, isFetching } = useQuery({
         queryKey: ['loggedUsers'],
         queryFn: () => usersService.me(),
         enabled: signedIn,
@@ -45,6 +46,12 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
             signout();
         }
     }, [isError, signout])
+
+    if(isFetching) {
+        return (
+            <PageLoader />
+        )
+    }
 
     return (
         <AuthContext.Provider value={{ signedIn, signin, signout}}>
