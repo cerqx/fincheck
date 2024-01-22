@@ -5,6 +5,7 @@ import { usersService } from '../services/usersService';
 import { httpClient } from '../services/httpClient';
 import toast from 'react-hot-toast';
 import { PageLoader } from '../../view/components/PageLoader';
+import { queryClient } from '../../App';
 
 interface AuthContextValue {
      signedIn: boolean;
@@ -20,6 +21,13 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
         return !!storedAccessToken
     });
 
+    const { isError, isFetching, isSuccess } = useQuery({
+        queryKey: ['loggedUsers'],
+        queryFn: () => usersService.me(),
+        enabled: signedIn,
+        staleTime: Infinity
+    })
+
     const signin = useCallback((accessToken: string) => {
         localStorage.setItem(localStorageKeys.ACCESS_TOKEN, accessToken);
         httpClient.defaults.headers.Authorization = `Bearer ${accessToken }`
@@ -29,16 +37,10 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
 
     const signout = useCallback(() => {
         localStorage.removeItem(localStorageKeys.ACCESS_TOKEN);
+        queryClient.removeQueries();
         
         setSignedIn(false);
     }, []);
-
-    const { isError, isFetching, isSuccess } = useQuery({
-        queryKey: ['loggedUsers'],
-        queryFn: () => usersService.me(),
-        enabled: signedIn,
-        staleTime: Infinity
-    })
 
     useEffect(() => {
         if(isError) {
