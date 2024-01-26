@@ -3,8 +3,8 @@ import { AccountCard } from "./AccountCard";
 import { Swiper, SwiperSlide  } from 'swiper/react';
 
 import 'swiper/css';
-import { AccountsSliderNavigation } from "./AccountsSliderNavigation";
 import { useAccountsController } from "./useAccountsController";
+import { SliderNavigation } from "./SliderNavigation";
 
 export function Accounts() {
     const { sliderState, setSliderState, windowWidth } = useAccountsController();
@@ -38,7 +38,7 @@ export function Accounts() {
                         <div className="flex items-center justify-between mb-4" slot="container-start">
                             <strong className="text-white tracking-[-1px] text-lg font-bold">Minhas contas</strong>
 
-                            <AccountsSliderNavigation 
+                            <SliderNavigation 
                                 isBeginning={sliderState.isBeginning} 
                                 isEnd={sliderState.isEnd} 
                             /> 
