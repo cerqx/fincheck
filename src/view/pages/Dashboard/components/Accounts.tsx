@@ -1,8 +1,13 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { EyeIcon } from "../../../components/icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
+import { Swiper, SwiperSlide  } from 'swiper/react';
+
+import 'swiper/css';
+import { AccountsSliderNavigation } from "./AccountsSliderNavigation";
 
 export function Accounts() {
+    
+
     return (
         <div className="bg-teal-900 rounded-2xl w-full h-full px-4 py-8 md:p-10 flex flex-col">
             <div>
@@ -17,42 +22,47 @@ export function Accounts() {
             </div>
 
             <div className="flex-1 flex flex-col justify-end">
-                <div className="flex items-center justify-between">
-                    <strong className="text-white tracking-[-1px] text-lg font-bold">Minhas contas</strong>
+                <div>
+                    <Swiper
+                        spaceBetween={16}
+                        slidesPerView={2.1}
+                    >
+                        <div className="flex items-center justify-between" slot="container-start">
+                            <strong className="text-white tracking-[-1px] text-lg font-bold">Minhas contas</strong>
 
-                    <div>
-                        <button 
-                            className="py-3 pl-2.5 pr-3.5 rounded-full enabled:hover:bg-black/10 transition-colors disabled:opacity-40"
-                            disabled
-                        >
-                            <ChevronLeftIcon className="text-white w-6 h-6" />
-                        </button>
+                            <AccountsSliderNavigation /> 
+                            
+                        </div>
 
-                        <button className="py-3 pl-2.5 pr-3.5 rounded-full enabled:hover:bg-black/10 transition-colors disabled:opacity-40">
-                            <ChevronRightIcon className="text-white w-6 h-6"  />
-                        </button>
-                    </div>
-                </div>
+                        <div className="mt-4">
+                            <SwiperSlide>
+                                <AccountCard 
+                                    color="#7950F2"
+                                    name="Nubank"
+                                    balance={1000.23}
+                                    type="CASH"
+                                />
+                            </SwiperSlide>
 
-                <div className="mt-4">
-                    <AccountCard 
-                        color="#7950F2"
-                        name="Nubank"
-                        balance={1000.23}
-                        type="CASH"
-                    />
-                    <AccountCard 
-                        color="#F00"
-                        name="Inter"
-                        balance={2000.00}
-                        type="INVESTMENT"
-                    />
-                    <AccountCard 
-                        color="#0F0"
-                        name="Carteira"
-                        balance={30000.00}
-                        type="CHECKING"
-                    />
+                            <SwiperSlide>
+                                <AccountCard 
+                                    color="#F00"
+                                    name="Inter"
+                                    balance={2000.00}
+                                    type="INVESTMENT"
+                                />
+                            </SwiperSlide>
+
+                            <SwiperSlide>
+                                <AccountCard 
+                                    color="#0F0"
+                                    name="Carteira"
+                                    balance={30000.00}
+                                    type="CHECKING"
+                                />
+                            </SwiperSlide>                                                                        
+                        </div>
+                    </Swiper>
                 </div>
             </div>
         </div>
