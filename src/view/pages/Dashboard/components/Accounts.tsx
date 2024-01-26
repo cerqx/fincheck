@@ -27,41 +27,39 @@ export function Accounts() {
                         spaceBetween={16}
                         slidesPerView={2.1}
                     >
-                        <div className="flex items-center justify-between" slot="container-start">
+                        <div className="flex items-center justify-between mb-4" slot="container-start">
                             <strong className="text-white tracking-[-1px] text-lg font-bold">Minhas contas</strong>
 
                             <AccountsSliderNavigation /> 
                             
                         </div>
 
-                        <div className="mt-4">
-                            <SwiperSlide>
-                                <AccountCard 
-                                    color="#7950F2"
-                                    name="Nubank"
-                                    balance={1000.23}
-                                    type="CASH"
-                                />
-                            </SwiperSlide>
+                        <SwiperSlide>
+                            <AccountCard 
+                                color="#7950F2"
+                                name="Nubank"
+                                balance={1000.23}
+                                type="CASH"
+                            />
+                        </SwiperSlide>
 
-                            <SwiperSlide>
-                                <AccountCard 
-                                    color="#F00"
-                                    name="Inter"
-                                    balance={2000.00}
-                                    type="INVESTMENT"
-                                />
-                            </SwiperSlide>
+                        <SwiperSlide>
+                            <AccountCard 
+                                color="#F00"
+                                name="Inter"
+                                balance={2000.00}
+                                type="INVESTMENT"
+                            />
+                        </SwiperSlide>
 
-                            <SwiperSlide>
-                                <AccountCard 
-                                    color="#0F0"
-                                    name="Carteira"
-                                    balance={30000.00}
-                                    type="CHECKING"
-                                />
-                            </SwiperSlide>                                                                        
-                        </div>
+                        <SwiperSlide>
+                            <AccountCard 
+                                color="#0F0"
+                                name="Carteira"
+                                balance={30000.00}
+                                type="CHECKING"
+                            />
+                        </SwiperSlide>                                                                        
                     </Swiper>
                 </div>
             </div>
