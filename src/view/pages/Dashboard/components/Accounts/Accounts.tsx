@@ -1,4 +1,4 @@
-import { EyeIcon } from "../../../components/icons/EyeIcon";
+import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 import { Swiper, SwiperSlide  } from 'swiper/react';
 
@@ -30,7 +30,7 @@ export function Accounts() {
                         <div className="flex items-center justify-between mb-4" slot="container-start">
                             <strong className="text-white tracking-[-1px] text-lg font-bold">Minhas contas</strong>
 
-                            <AccountsSliderNavigation /> 
+                            <AccountsSliderNavigation isBeginning={false} isEnd={false} /> 
                             
                         </div>
 
