@@ -25,9 +25,9 @@ interface DropdownMenuContentProps {
 export function DropdownMenuContent({ children, className }: DropdownMenuContentProps) {
     return (
         <RdxDropdownMenu.Portal>
-            <RdxDropdownMenu.Content 
+            <RdxDropdownMenu.Content
                 className={cn(
-                    'bg-white rounded-2xl p-2 space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]',
+                    'bg-white rounded-2xl p-2 space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] data-[side=bottom]:animate-slideUpAndFade',
                     className
                 )}
             >
