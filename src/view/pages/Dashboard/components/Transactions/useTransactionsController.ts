@@ -11,6 +11,7 @@ export function useTransactionsController() {
     return {
         slideState,
         setSlideState,
-        areValuesVisible
+        areValuesVisible,
+        isLoading: false,
     }
 }
