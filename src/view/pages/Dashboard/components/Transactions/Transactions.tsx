@@ -8,13 +8,15 @@ import { SliderNavigation } from "./SliderNavigation";
 import { useTransactionsController } from "./useTransactionsController";
 
 import 'swiper/css';
+import { formatCurrency } from "../../../../../app/utils/formatCurrency";
+import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
 
 export function Transactions() {
     const { slideState, setSlideState } = useTransactionsController();
 
     return (
-        <div className="bg-gray-100 rounded-2xl w-full h-full px-4 py-8 md:p-10">
-            <header className="">
+        <div className="bg-gray-100 rounded-2xl w-full h-full px-4 py-8 flex flex-col md:p-10">
+            <header>
                  <div className="flex items-center justify-between">
                     <button className="flex items-center gap-2">
                         <TransactionsIcon />
@@ -53,8 +55,46 @@ export function Transactions() {
                  </div>
             </header>
 
-            <div className="mt-4">
-                Conteúdo
+            <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
+                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                    <div className="flex-1 flex items-center gap-3">
+                        <CategoryIcon type="expense"/>
+
+                        <div>
+                            <strong className="text-gray-800 font-bold tracking-[-0.5px]">
+                                Almoço
+                            </strong>
+
+                            <span className="text-sm text-gray-600 block ">
+                                14/01/2024
+                            </span>
+                        </div>
+                    </div>
+
+                    <span className="text-red-800 font-medium tracking-[-0.5px]">
+                        - {formatCurrency(120)}
+                    </span>
+                </div>
+
+                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                    <div className="flex-1 flex items-center gap-3">
+                        <CategoryIcon type="income"/>
+
+                        <div>
+                            <strong className="text-gray-800 font-bold tracking-[-0.5px]">
+                                Freelance
+                            </strong>
+
+                            <span className="text-sm text-gray-600 block ">
+                                15/01/2024
+                            </span>
+                        </div>
+                    </div>
+
+                    <span className="text-green-800 font-medium tracking-[-0.5px]">
+                        {formatCurrency(2120 )}
+                    </span>
+                </div>
             </div>
         </div>
     )
