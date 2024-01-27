@@ -20,19 +20,23 @@ export function Transactions() {
         slideState,
         setSlideState,
         areValuesVisible,
+        transactions,
+        isInitialLoading,
         isLoading,
-        transactions
+
     } = useTransactionsController();
+
+    const hasTransactions = transactions.length > 0;
 
     return (
         <div className="bg-gray-100 rounded-2xl w-full h-full px-4 py-8 flex flex-col md:p-10">
-            {isLoading && (
+            {isInitialLoading && (
                 <div className="w-full h-full flex items-center justify-center">
                     <Spinner className="w-10 h-10" />
                 </div>
             )}
 
-           {!isLoading && (
+           {!isInitialLoading && (
             <>
                 <header>
                     <div className="flex items-center justify-between">
@@ -74,14 +78,22 @@ export function Transactions() {
                 </header>
 
                 <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-                    {transactions.length === 0 && (
+                    {(!hasTransactions || isLoading) && (
                         <div className="flex flex-col items-center justify-center h-full">
-                            <img src={emptyStateImage} alt="Empty State" />
-                            <p className="text-gray-700">Não encontramos nenhuma transação!</p>
+                            {isLoading && (
+                                <Spinner />
+                            )}
+
+                            {!isLoading && (
+                                <>
+                                    <img src={emptyStateImage} alt="Empty State" />
+                                    <p className="text-gray-700">Não encontramos nenhuma transação!</p>
+                                </>
+                            )}
                         </div>
                     )}
 
-                    {transactions.length > 0 && (
+                    {hasTransactions && !isLoading && (
                         <>
                             <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
                                 <div className="flex-1 flex items-center gap-3">

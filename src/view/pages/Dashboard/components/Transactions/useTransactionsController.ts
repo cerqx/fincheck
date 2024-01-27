@@ -12,7 +12,8 @@ export function useTransactionsController() {
         slideState,
         setSlideState,
         areValuesVisible,
-        isLoading: false,
         transactions: [],
+        isInitialLoading: false,
+        isLoading: false,
     }
 }
