@@ -13,5 +13,6 @@ export function useTransactionsController() {
         setSlideState,
         areValuesVisible,
         isLoading: false,
+        transactions: [],
     }
 }
