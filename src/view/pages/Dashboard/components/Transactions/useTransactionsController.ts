@@ -7,6 +7,15 @@ export function useTransactionsController() {
         isBeginning: true,
         isEnd: false
     })
+    const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(true);
+
+    function handleOpenFiltersModal() {
+        setIsFiltersModalOpen(true);
+    }
+
+    function handleCloseFiltersModal() {
+        setIsFiltersModalOpen(false);
+    }
 
     return {
         slideState,
@@ -15,5 +24,8 @@ export function useTransactionsController() {
         transactions: [],
         isInitialLoading: false,
         isLoading: false,
+        isFiltersModalOpen,
+        handleOpenFiltersModal,
+        handleCloseFiltersModal
     }
 }
