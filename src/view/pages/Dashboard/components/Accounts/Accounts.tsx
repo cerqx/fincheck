@@ -6,9 +6,16 @@ import 'swiper/css';
 import { useAccountsController } from "./useAccountsController";
 import { SliderNavigation } from "./SliderNavigation";
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
+import { cn } from "../../../../../app/utils/cn";
 
 export function Accounts() {
-    const { sliderState, setSliderState, windowWidth } = useAccountsController();
+    const {
+        sliderState,
+        setSliderState,
+        windowWidth,
+        areValuesVisible,
+        toggleValuesVisibility 
+    } = useAccountsController();
 
 
     return (
@@ -17,9 +24,19 @@ export function Accounts() {
                 <span className="tracking-[0.5px] text-white block">Saldo total</span>
                
                <div className="flex items-center gap-2">
-                    <strong className="text-2xl tracking-[-1px] text-white">{formatCurrency(1000)}</strong>
-                    <button className="h-8 w-8 flex items-center justify-center">
-                        <EyeIcon open/>
+                    <strong 
+                        className={cn(
+                            'text-2xl tracking-[-1px] text-white',
+                            !areValuesVisible && 'blur-md'
+                        )}
+                    >
+                        {formatCurrency(1000)}
+                    </strong>
+                    <button 
+                        className="h-8 w-8 flex items-center justify-center"
+                        onClick={toggleValuesVisibility}
+                    >
+                        <EyeIcon open={areValuesVisible} />
                     </button>
                </div>
             </div>
