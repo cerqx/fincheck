@@ -31,7 +31,21 @@ export function NewAccountModal() {
                     />
 
                     <Select 
-                        error="Selecione uma fruta!"
+                        placeholder="Tipo"
+                        options={[
+                            {
+                                value: 'CHECKING',
+                                label: 'Conta Corrente'
+                            },
+                            {
+                                value: 'INVESTMENT',
+                                label: 'Investimentos'
+                            },
+                            {
+                                value: 'CASH',
+                                label: 'Dinheiro Físico'
+                            },
+                        ]}
                     />
                 </div>
             </form>
