@@ -76,7 +76,7 @@ export function Select({ className, error, placeholder, options }: SelectProps) 
                     </RdxSelect.Content>
                     </RdxSelect.Portal>
                 </RdxSelect.Root>
-          </div>
+            </div>
 
             {error && (
             <div className="flex items-center mt-2 gap-2 text-red-900">

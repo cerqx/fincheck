@@ -1,3 +1,4 @@
+import { ColorsDropdowInput } from "../../../../components/ColorsDropdowInput";
 import { Input } from "../../../../components/Input";
 import { InputCurrency } from "../../../../components/InputCurrency";
 import { Modal } from "../../../../components/Modal";
@@ -47,6 +48,8 @@ export function NewAccountModal() {
                             },
                         ]}
                     />
+
+                    <ColorsDropdowInput error="Essa é uma msg de erro"/>
                 </div>
             </form>
         </Modal>
