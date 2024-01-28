@@ -49,7 +49,7 @@ export function NewAccountModal() {
                         ]}
                     />
 
-                    <ColorsDropdowInput error="Essa é uma msg de erro"/>
+                    <ColorsDropdowInput />
                 </div>
             </form>
         </Modal>

@@ -6,13 +6,19 @@ interface DashboardContextValue {
     isNewAccountModalOpen: boolean;
     handleNewAccountModalOpen(): void;
     handleNewAccountModalClose(): void;
+    isNewTransactionModalOpen: boolean;
+    handleNewTransactionModalOpen(type: 'INCOME' | 'EXPENSE'): void;
+    handleNewTransactionModalClose(): void;
+    newTransactionType: 'INCOME' | 'EXPENSE' | null;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValue);
 
 export function DashboardProvider({children}: {children: React.ReactNode }) {
     const [areValuesVisible, setAreValuesVisible ] = useState(true); 
-    const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(true);
+    const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+    const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
+    const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null);
 
     const toggleValuesVisibility = useCallback(() => {
         setAreValuesVisible(prevState => !prevState)
@@ -26,6 +32,16 @@ export function DashboardProvider({children}: {children: React.ReactNode }) {
         setIsNewAccountModalOpen(false);
     }, []);
 
+    const handleNewTransactionModalOpen = useCallback((type: 'INCOME' | 'EXPENSE') => {
+        setNewTransactionType(type);
+        setIsNewTransactionModalOpen(true);
+    }, []);
+
+    const handleNewTransactionModalClose = useCallback(() => {
+        setNewTransactionType(null);
+        setIsNewTransactionModalOpen(false);
+    }, []);
+
     return (
         <DashboardContext.Provider 
             value={{ 
@@ -34,6 +50,10 @@ export function DashboardProvider({children}: {children: React.ReactNode }) {
                 isNewAccountModalOpen,
                 handleNewAccountModalOpen,
                 handleNewAccountModalClose,
+                isNewTransactionModalOpen,
+                handleNewTransactionModalOpen,
+                handleNewTransactionModalClose,
+                newTransactionType
             }}
         >
             {children}
