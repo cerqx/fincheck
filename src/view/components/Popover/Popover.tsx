@@ -27,7 +27,7 @@ export function PopoverContent({ children, className }: PopoverContentProps) {
         <RdxPopover.Portal>
             <RdxPopover.Content
                 className={cn(
-                    'bg-white rounded-2xl p-2 space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-50',
+                    'bg-white rounded-2xl space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-50 p-4',
                     'data-[side=bottom]:animate-slideUpAndFade',
                     'data-[side=top]:animate-slideDownAndFade',
                     className
