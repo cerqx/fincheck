@@ -3,6 +3,7 @@ import { cn } from "../../app/utils/cn";
 import { useState } from "react";
 import { formatDate } from "../../app/utils/formatDate";
 import { Popover } from "./Popover";
+import { DatePicker } from "./DatePicker";
 
 interface DatePickerInputProps {
     error?: string;
@@ -11,7 +12,7 @@ interface DatePickerInputProps {
 
 
 export function DatePickerInput({ className, error }: DatePickerInputProps) {
-    const [selectedDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     return (
         <div>
@@ -32,7 +33,7 @@ export function DatePickerInput({ className, error }: DatePickerInputProps) {
                 </Popover.Trigger>
 
                 <Popover.Content className="z-[99]">
-                    Qualquer coisa
+                    <DatePicker value={selectedDate} onChange={date => setSelectedDate(date)}/>
                 </Popover.Content>
             </Popover.Root>
 
