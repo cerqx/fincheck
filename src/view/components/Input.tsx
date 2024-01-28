@@ -32,8 +32,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({placeholder, nam
             {placeholder}
         </label>
 
-        {error && 
-        (
+        {error && (
             <div className="flex items-center mt-2 gap-2 text-red-900">
                 <CrossCircledIcon />
                 <span className="text-xs">
