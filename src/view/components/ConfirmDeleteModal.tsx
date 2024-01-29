@@ -3,12 +3,14 @@ import { Modal } from "./Modal";
 import { TrashIcon } from "./icons/TrashIcon";
 
 interface ConfirmDeleteModalProps {
+    onConfirm(): void;
     onClose(): void;
     title: string;
     description?: string;
+    isLoading: boolean;
 }
 
-export function ConfirmDeleteModal({ title, description, onClose }: ConfirmDeleteModalProps) {
+export function ConfirmDeleteModal({ title, description, onClose, onConfirm, isLoading }: ConfirmDeleteModalProps) {
     return (
         <Modal title="Excluir" open onClose={onClose}>
             <div className="flex flex-col items-center text-center gap-6 ">
@@ -28,11 +30,21 @@ export function ConfirmDeleteModal({ title, description, onClose }: ConfirmDelet
             </div>
             
             <div className="mt-10 space-y-4">
-                <Button className="w-full" variant="danger">
+                <Button
+                    className="w-full"
+                    variant="danger"
+                    onClick={onConfirm}
+                    isPending={isLoading}
+                >
                     Sim, desejo excluir
                 </Button>
 
-                <Button className="w-full" variant="ghost" onClick={onClose}>
+                <Button
+                    className="w-full"
+                    variant="ghost"
+                    onClick={onClose}
+                    disabled={isLoading}
+                >
                     Cancelar
                 </Button>
             </div>
