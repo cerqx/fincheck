@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { bankAccountsService } from "../../../../../app/services/bankAccountService";
-import { BankAccountParams } from "../../../../../app/services/bankAccountService/create";
 import { currencyStringToNumber } from "../../../../../app/utils/currencyStringToNumber";
 import toast from "react-hot-toast";
+import { CreateBankAccountParams } from "../../../../../app/services/bankAccountService/create";
 
 const schema = z.object({
     initialBalance: z.string().min(1, 'Saldo inicial é obrigatório.'),
@@ -34,7 +34,7 @@ export function useNewAccountModalController() {
     });
 
     const { isPending, mutateAsync } = useMutation({
-        mutationFn: async (data: BankAccountParams) => {
+        mutationFn: async (data: CreateBankAccountParams) => {
             return bankAccountsService.create(data);
         }
     });
