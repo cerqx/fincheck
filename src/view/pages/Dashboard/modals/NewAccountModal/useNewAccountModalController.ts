@@ -27,7 +27,8 @@ export function useNewAccountModalController() {
         register, 
         formState: { errors },
         handleSubmit: hookFormHandleSubmit,
-        control
+        control,
+        reset
     } = useForm<FormData>({
         resolver: zodResolver(schema),
     });
@@ -47,6 +48,12 @@ export function useNewAccountModalController() {
 
             toast.success('Conta cadastrada com sucesso!');
             handleNewAccountModalClose();
+            reset({
+                initialBalance: "0",
+                name:"",
+                type: "INVESTMENT",
+                color: "",
+            });
         } catch {
             toast.error('Occ')
         }
