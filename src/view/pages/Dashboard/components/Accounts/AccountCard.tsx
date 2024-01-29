@@ -1,7 +1,7 @@
 import { cn } from "../../../../../app/utils/cn";
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { BankAccountTypeIcon } from "../../../../components/icons/BankAccountTypeIcon";
-import { useAccountsController } from "./useAccountsController";
+import { useDashboard } from "../../hooks/useDashboard";
 
 interface AccountCardProps {
     color: string;
@@ -11,7 +11,7 @@ interface AccountCardProps {
 }
 
 export function AccountCard({ color, name, balance, type }: AccountCardProps) {
-    const { areValuesVisible } = useAccountsController();
+    const { areValuesVisible } = useDashboard();
     return (
         <div 
             className="p-4 bg-white rounded-2xl h-[200px] flex flex-col justify-between border-b-4 border-teal-950"
