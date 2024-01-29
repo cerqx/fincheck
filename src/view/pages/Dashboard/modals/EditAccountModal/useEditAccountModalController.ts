@@ -7,6 +7,7 @@ import { bankAccountsService } from "../../../../../app/services/bankAccountServ
 import { currencyStringToNumber } from "../../../../../app/utils/currencyStringToNumber";
 import toast from "react-hot-toast";
 import { UpdateBankAccountParams } from "../../../../../app/services/bankAccountService/update";
+import { useState } from "react";
 
 const schema = z.object({
     initialBalance: z.union([z.string().min(1, 'Saldo inicial é obrigatório.'), z.number() ]),
@@ -39,6 +40,8 @@ export function useEditAccountModalController() {
         }
     });
 
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(true);
+
     const { isPending, mutateAsync } = useMutation({
         mutationFn: async (data: UpdateBankAccountParams) => {
             return bankAccountsService.update(data);
@@ -63,6 +66,14 @@ export function useEditAccountModalController() {
         }
     });
 
+    function handleDeleteModalOpen() {
+        setIsDeleteModalOpen(true);
+    }
+
+    function handleDeleteModalClose() {
+        setIsDeleteModalOpen(false);
+    }
+
     return {
         isEditAccountModalOpen,
         handleEditAccountModalClose,
@@ -70,6 +81,9 @@ export function useEditAccountModalController() {
         errors,
         handleSumit,
         control,
-        isPending
+        isPending,
+        isDeleteModalOpen,
+        handleDeleteModalOpen,
+        handleDeleteModalClose
     }
 }
