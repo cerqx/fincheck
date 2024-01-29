@@ -18,8 +18,6 @@ export function useAccountsController() {
         isEnd: false,
     });
 
-    console.log('useAccountsController')
-
     const {data, isFetching} = useQuery({
         queryKey: ['bankAccounts'],
         queryFn: () => bankAccountsService.getAll(),

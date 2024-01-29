@@ -1,4 +1,5 @@
 import { createContext, useCallback, useState } from "react";
+import { BankAccount } from "../../../../app/entities/BankAccount";
 
 interface DashboardContextValue {
     areValuesVisible: boolean;
@@ -10,6 +11,10 @@ interface DashboardContextValue {
     handleNewTransactionModalOpen(type: 'INCOME' | 'EXPENSE'): void;
     handleNewTransactionModalClose(): void;
     newTransactionType: 'INCOME' | 'EXPENSE' | null;
+    isEditAccountModalOpen: boolean;
+    handleEditAccountModalOpen(bankAccount: BankAccount): void;
+    handleEditAccountModalClose(): void;
+    selectedBankAccount: null | BankAccount;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValue);
@@ -19,7 +24,9 @@ export function DashboardProvider({children}: {children: React.ReactNode }) {
     const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
     const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
     const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null);
-
+    const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(false);
+    const [selectedBankAccount, setSelectedBankAccount] = useState<null | BankAccount>(null);
+    
     const toggleValuesVisibility = useCallback(() => {
         setAreValuesVisible(prevState => !prevState)
     }, []);
@@ -42,6 +49,16 @@ export function DashboardProvider({children}: {children: React.ReactNode }) {
         setIsNewTransactionModalOpen(false);
     }, []);
 
+    const handleEditAccountModalOpen = useCallback((bankAccount: BankAccount) => {
+        setSelectedBankAccount(bankAccount);
+        setIsEditAccountModalOpen(true);
+    }, []);
+
+    const handleEditAccountModalClose = useCallback(() => {
+        setSelectedBankAccount(null)
+        setIsEditAccountModalOpen(false);
+    }, []);
+
     return (
         <DashboardContext.Provider 
             value={{ 
@@ -53,7 +70,11 @@ export function DashboardProvider({children}: {children: React.ReactNode }) {
                 isNewTransactionModalOpen,
                 handleNewTransactionModalOpen,
                 handleNewTransactionModalClose,
-                newTransactionType
+                newTransactionType,
+                isEditAccountModalOpen,
+                handleEditAccountModalOpen,
+                handleEditAccountModalClose,
+                selectedBankAccount 
             }}
         >
             {children}
