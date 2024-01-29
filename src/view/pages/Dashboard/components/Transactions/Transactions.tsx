@@ -14,6 +14,7 @@ import emptyStateImage from "../../../../../assets/empty-state.svg";
 import 'swiper/css';
 import { TransactionTypeDropdown } from "./TransactionTypeDropdown";
 import { FiltersModal } from "./FiltersModal";
+import { formatDate } from "../../../../../app/utils/formatDate";
 
 export function Transactions() {
     const {
@@ -92,57 +93,37 @@ export function Transactions() {
                     )}
 
                     {hasTransactions && !isLoading && (
-                        <>
-                            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                        transactions.map(transaction => (
+                            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4" key={transaction.id}>
                                 <div className="flex-1 flex items-center gap-3">
-                                    <CategoryIcon type="expense"/>
+                                    <CategoryIcon 
+                                        type={transaction.type === 'EXPENSE' ? 'expense' : 'income'}
+                                        category={transaction.category?.icon}
+                                    />
 
                                     <div>
                                         <strong className="text-gray-800 font-bold tracking-[-0.5px]">
-                                            Almoço
+                                            {transaction.name}
                                         </strong>
 
                                         <span className="text-sm text-gray-600 block ">
-                                            14/01/2024
+                                            {formatDate(new Date(transaction.date))}
                                         </span>
                                     </div>
                                 </div>
 
                                 <span 
                                     className={cn(
-                                        'text-red-800 font-medium tracking-[-0.5px]',
+                                        'font-medium tracking-[-0.5px]',
+                                        transaction.type === 'EXPENSE' ? 'text-red-800' : 'text-green-800',
                                         !areValuesVisible && 'blur-sm'
                                     )}
                                 >
-                                    - {formatCurrency(120)}
+                                    {transaction.type === 'EXPENSE' ? '-' : '+'}
+                                    {formatCurrency(transaction.value)}
                                 </span>
                             </div>
-
-                            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-                                <div className="flex-1 flex items-center gap-3">
-                                    <CategoryIcon type="income"/>
-
-                                    <div>
-                                        <strong className="text-gray-800 font-bold tracking-[-0.5px]">
-                                            Freelance
-                                        </strong>
-
-                                        <span className="text-sm text-gray-600 block ">
-                                            15/01/2024
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <span 
-                                    className={cn(
-                                        'text-green-800 font-medium tracking-[-0.5px]',
-                                        !areValuesVisible && 'blur-sm'
-                                    )}
-                                >
-                                    {formatCurrency(2120 )}
-                                </span>
-                            </div>
-                        </>
+                        ))
                     )}
                 </div>
             </>

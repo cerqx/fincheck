@@ -1,8 +1,12 @@
 export interface Transaction {
-    bankAccountId: string;
-    categoryId: string;
+    id: string;
     name: string;
     value: number;
-    date: Date;
-    type: 'INCOME' | 'EXPENSE'
+    date: string;
+    type: 'INCOME' | 'EXPENSE';
+    category?: {
+        id: string;
+        name: string;
+        icon: string;
+    }
 }
