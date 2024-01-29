@@ -73,9 +73,11 @@ export function NewTransactionModal() {
                     />
 
                     <DatePickerInput />
-
-                    <Button>Criar</Button>
                 </div>
+
+                <Button type="submit" className="w-full mt-6">
+                    Criar
+                </Button>
             </form>
         </Modal>
     )
