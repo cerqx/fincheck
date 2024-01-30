@@ -1,36 +1,23 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Modal } from "../../../../../components/Modal";
 import { Button } from "../../../../../components/Button";
-import { useFiltersModal } from "./useFiltersModal";
 import { cn } from "../../../../../../app/utils/cn";
+import { useFiltersModalController } from "./useFiltersModalController";
 
 interface FiltersModalProps {
     open: boolean;
     onClose(): void;
+    onApplyFilters(filters: {selectedBankAccountId: string | undefined, selectedYear: number}): void;
 }
 
-const mockedAccounts = [
-    {
-        id: '1',
-        name: 'Nubank'
-    },
-    {
-        id: '2',
-        name: 'Inter'
-    },
-    {
-        id: '3',
-        name: 'XP Investimentos'
-    },
-];
-
-export function FiltersModal({ open, onClose }: FiltersModalProps) {
+export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProps) {
     const {
         selectedBankAccountId,
         handleSelectBankAccount,
         selectedYear,
-        handleChangeYear
-    } = useFiltersModal()
+        handleChangeYear,
+        accounts
+    } = useFiltersModalController()
 
     return (
         <Modal open={open} onClose={onClose} title="Filtros">
@@ -40,7 +27,7 @@ export function FiltersModal({ open, onClose }: FiltersModalProps) {
                 </span>
 
                 <div className="space-y-2 mt-2">
-                    {mockedAccounts?.map(account => (
+                    {accounts?.map(account => (
                         <button 
                             className={cn(
                                 'text-left text-gray-800 w-full p-2 rounded-2xl hover:bg-gray-50 transition-colors',
@@ -83,7 +70,13 @@ export function FiltersModal({ open, onClose }: FiltersModalProps) {
                 </div>
             </div>
 
-            <Button className="w-full mt-10">
+            <Button
+                className="w-full
+                mt-10"
+                onClick={() => onApplyFilters({
+                    selectedBankAccountId, selectedYear
+                })}
+            >
                 Aplicar Filtros
             </Button>
         </Modal>

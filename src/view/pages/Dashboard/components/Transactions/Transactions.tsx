@@ -26,7 +26,10 @@ export function Transactions() {
         isLoading,
         isFiltersModalOpen,
         handleOpenFiltersModal,
-        handleCloseFiltersModal
+        handleCloseFiltersModal,
+        handleChangeFilters,
+        filters,
+        handleApplyFilters
     } = useTransactionsController();
 
     const hasTransactions = transactions.length > 0;
@@ -41,11 +44,18 @@ export function Transactions() {
 
            {!isInitialLoading && (
             <>
-                <FiltersModal open={isFiltersModalOpen} onClose={handleCloseFiltersModal} />
+                <FiltersModal 
+                    open={isFiltersModalOpen} 
+                    onClose={handleCloseFiltersModal} 
+                    onApplyFilters={handleApplyFilters}
+                />
 
                 <header>
                     <div className="flex items-center justify-between">
-                        <TransactionTypeDropdown />
+                        <TransactionTypeDropdown 
+                            onSelect={handleChangeFilters('type')}
+                            selectedType={filters.type}
+                        />
 
                         <button onClick={handleOpenFiltersModal}>
                             <FilterIcon />
@@ -56,11 +66,13 @@ export function Transactions() {
                         <Swiper
                             slidesPerView={3}
                             centeredSlides
+                            initialSlide={filters.month}
                             onSlideChange={(swiper) => {
                                 setSlideState({
                                     isBeginning: swiper.isBeginning,
                                     isEnd: swiper.isEnd
                                 })
+                                handleChangeFilters('month')(swiper.realIndex);
                             }}
                         >
                             <SliderNavigation isBeginning={slideState.isBeginning} isEnd={slideState.isEnd} />
@@ -68,7 +80,7 @@ export function Transactions() {
                             {MONTHS.map((month, index) => (
                                 <SwiperSlide key={month}>
                                     {({ isActive }) => (
-                                        <SliderOption isActive={isActive} month={month} index={index}/>
+                                        <SliderOption isActive={isActive} month={month} index={index} />
                                     )}
                                 </SwiperSlide>
                             ))}
