@@ -10,7 +10,7 @@ export interface CreateTransactionParams {
 }
 
 export async function create(params: CreateTransactionParams) {
-    const { data } = await httpClient.post('transactions', params);
+    const { data } = await httpClient.post('/transactions', params);
 
     return data;
 }

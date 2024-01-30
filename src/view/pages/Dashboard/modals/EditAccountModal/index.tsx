@@ -43,7 +43,7 @@ export function EditAccountModal() {
             open={isEditAccountModalOpen}
             onClose={handleEditAccountModalClose}
             rightAction={(
-                <button onClick={handleDeleteModalOpen }>
+                <button onClick={handleDeleteModalOpen}>
                     <TrashIcon className="w-6 h-6 text-red-900" />
                 </button>
             )}
